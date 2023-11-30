@@ -8,6 +8,14 @@ export default async function Index() {
           <Navbar />
         </div>
       </nav>
+      <main className="flex-1 flex flex-col items-center justify-center">
+        <h1 className="text-4xl font-bold text-center text-foreground">
+          I code about one line at a time.
+        </h1>
+        <p className="text-xl text-center text-foreground">
+          I am a wanabe developer who gets side-tracked from their projects 100% of the time.
+        </p>
+      </main>
     </div>
   )
 }

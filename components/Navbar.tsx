@@ -12,22 +12,22 @@ const Navbar: React.FC = () => {
           <div className="flex-grow">
             <div className="flex">
               <a
-                href="#"
+                href="/"
                 className="text-gray-300 hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition duration-500"
               >
                 Home
               </a>
               <a
-                href="#"
+                href="/about"
                 className="text-gray-300 hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition duration-500"
               >
-                About
+                About me
               </a>
               <a
-                href="#"
+                href="/blog"
                 className="text-gray-300 hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition duration-500"
               >
-                Contact
+                Blog
               </a>
             </div>
           </div>
