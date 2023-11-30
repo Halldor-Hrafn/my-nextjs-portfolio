@@ -31,25 +31,27 @@ export default function Login({
   const signUp = async (formData: FormData) => {
     'use server'
 
-    const origin = headers().get('origin')
-    const email = formData.get('email') as string
-    const password = formData.get('password') as string
-    const cookieStore = cookies()
-    const supabase = createClient(cookieStore)
+    return redirect('/login?message=Sign ups are currently blocked by the developer as to prevent any abuse of the application, contact the developer (if you know them) in order to sign up.');
 
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        emailRedirectTo: `${origin}/auth/callback`,
-      },
-    })
+    // const origin = headers().get('origin')
+    // const email = formData.get('email') as string
+    // const password = formData.get('password') as string
+    // const cookieStore = cookies()
+    // const supabase = createClient(cookieStore)
 
-    if (error) {
-      return redirect('/login?message=Could not authenticate user')
-    }
+    // const { error } = await supabase.auth.signUp({
+    //   email,
+    //   password,
+    //   options: {
+    //     emailRedirectTo: `${origin}/auth/callback`,
+    //   },
+    // })
 
-    return redirect('/login?message=Check email to continue sign in process')
+    // if (error) {
+    //   return redirect('/login?message=Could not authenticate user')
+    // }
+
+    // return redirect('/login?message=Check email to continue sign in process')
   }
 
   return (
