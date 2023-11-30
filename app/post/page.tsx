@@ -1,57 +1,27 @@
-"use client";
+import Navbar from "@/components/Navbar";
+import { createClient } from "@/utils/supabase/server";
+import { cookies } from 'next/headers'
 
-import Post from "@/components/Post";
+export default async function Page() {
+  const cookieStore = cookies()
+  const supabase = createClient(cookieStore);
 
-import { createClient } from "@/utils/supabase/client";
-import { useState, useEffect } from "react";
-
-export default function Page() {
-  const [posts, setPosts] = useState<any[] | null>(null);
-
-  const supabase = createClient();
-
-  useEffect(() => {
-    const fetchPosts = async () => {
-      "use client";
-
-      const { data } = await supabase.from("posts").select("*");
-
-      setPosts(data);
-    };
-
-    const timeout = setTimeout(() => {
-      fetchPosts();
-    }, 1000);
-  }, []);
-
-  const inputPost = async (e: any) => {
-    e.preventDefault();
-    const { title, content } = e.target.elements;
-
-    const { data, error } = await supabase
-      .from("posts")
-      .insert([
-        { title: title.value, content: content.value }
-      ])
-
-      if (error) {
-        console.log(error);
-      } else {
-        console.log(data);
-      }
-  }
+  const { data: posts, error: postError } = await supabase
+    .from("posts")
+    .select("*");
 
   return (
-    <div className="flex-1 flex flex-col w-full px-8 sm:max-w-md justify-center gap-2">
-      <form onSubmit={inputPost}>
-        <input type="text" name="title" />
-        <input type="text" name="content" />
-        <button type="submit">Submit</button>
-      </form>
-      <h1>Posts</h1>
-      {posts?.map((post) => (
-        <Post key={post.id} title={post.title} content={post.content} />
-      ))}
+    <div className="flex-1 w-full flex flex-col gap-20 items-center">
+      <Navbar />
+      <main>
+        {posts?.map((post, index) => (
+          <div key={index} className="bg-white rounded-md p-4 mb-4">
+            <h3 className="text-xl font-bold mb-2">{post.title}</h3>
+            <p className="text-gray-500">{post.content}</p>
+            <a href={`/profile/${post.author_id}`} className="text-blue-500 hover:underline">Author</a>
+          </div>
+        ))}
+      </main>
     </div>
   );
 }
