@@ -8,6 +8,8 @@ export default async function Page() {
 
   const userId = (await supabase.auth.getUser()).data?.user?.id;
 
+  console.log(userId)
+
   const { data: posts, error: postError } = await supabase
     .from("posts")
     .select("*")
@@ -21,7 +23,10 @@ export default async function Page() {
   const { data: profile, error: profileError } = await supabase
     .from("profiles")
     .select("*")
-    .eq("user_id", userId);
+    .eq("auth_id", userId);
+
+  console.log(profile)
+  console.log(profileError)
 
   return (
     <div className="flex-1 w-full flex flex-col gap-20 items-center">

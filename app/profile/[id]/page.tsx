@@ -21,7 +21,7 @@ export default async function Page({ params }: { params: { id: string }}) {
   const { data: profile, error: profileError } = await supabase
     .from("profiles")
     .select("*")
-    .eq("user_id", userId);
+    .eq("auth_id", userId);
 
   return (
     <div className="flex-1 w-full flex flex-col gap-20 items-center">
