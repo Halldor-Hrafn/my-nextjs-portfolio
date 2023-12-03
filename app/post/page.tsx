@@ -8,12 +8,18 @@ export default async function Page() {
 
   const { data: posts, error: postError } = await supabase
     .from("posts")
-    .select("*");
+    .select("*")
+    .order("created_at", { ascending: false });
 
   return (
     <div className="flex-1 w-full flex flex-col gap-20 items-center">
       <Navbar />
-      <main>
+      <main className="w-3/4 mx-auto">
+        <div className="p-10">
+          <a href="/post/create" className="inline-block px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600">
+            Create Post
+          </a>
+        </div>
         {posts?.map((post, index) => (
           <div key={index} className="bg-white rounded-md p-4 mb-4">
             <h3 className="text-xl font-bold mb-2">{post.title}</h3>
