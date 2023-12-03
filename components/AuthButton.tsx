@@ -23,7 +23,9 @@ export default async function AuthButton() {
   return user ? (
     <div className="flex items-center gap-4 text-white">
       <span className="truncate" style={{ maxWidth: '70px'}}>
-        Hey, {user.email}!
+        <a href={`/profile/${user.id}`}>
+          Hey, {user.email}!
+        </a>
       </span>
       <form action={signOut}>
         <button className="py-2 px-4 rounded-md no-underline text-gray-800 bg-btn-background hover:bg-btn-background-hover">
