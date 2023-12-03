@@ -6,6 +6,7 @@ export default async function Page() {
   const cookieStore = cookies()
   const supabase = createClient(cookieStore);
 
+  const viewUserId = (await supabase.auth.getUser()).data?.user?.id;
   const userId = (await supabase.auth.getUser()).data?.user?.id;
 
   console.log(userId)
@@ -42,6 +43,11 @@ export default async function Page() {
             />
             <h1 className="text-3xl font-bold">{profile![0].user_name}</h1>
             <p className="text-gray-500">{profile![0].about_me}</p>
+            {viewUserId === userId && (
+              <a href={`/profile/${userId}/settings`} className="mt-4 text-blue-500">
+                Edit Profile
+              </a>
+            )}
           </div>
         </div>
         <div className="col-span-2">
