@@ -96,7 +96,7 @@ export default function Login({
           className="rounded-md px-4 py-2 bg-inherit border mb-6"
           type="text"
           name='username'
-          required />
+          />
         <label className="text-md" htmlFor="email">
           Email
         </label>
