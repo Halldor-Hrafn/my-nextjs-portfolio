@@ -33,7 +33,7 @@ export default async function Page() {
     ])
     .select();
 
-    const imagePath = `post/${post![0].id}`
+    const imagePath = `post/${post![0].id}/${image.name}`
 
     const { data, error } = await supabase
       .from("post-images")
