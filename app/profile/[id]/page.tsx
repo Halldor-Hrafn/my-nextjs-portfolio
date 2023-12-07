@@ -6,6 +6,7 @@ export default async function Page({ params }: { params: { id: string }}) {
   const cookieStore = cookies()
   const supabase = createClient(cookieStore);
 
+  const viewUserId = (await supabase.auth.getUser()).data?.user?.id;
   const userId = params.id;
 
   const { data: posts, error: postError } = await supabase
@@ -21,7 +22,7 @@ export default async function Page({ params }: { params: { id: string }}) {
   const { data: profile, error: profileError } = await supabase
     .from("profiles")
     .select("*")
-    .eq("user_id", userId);
+    .eq("auth_id", userId);
 
   return (
     <div className="flex-1 w-full flex flex-col gap-20 items-center">
@@ -37,6 +38,11 @@ export default async function Page({ params }: { params: { id: string }}) {
             />
             <h1 className="text-3xl font-bold">{profile![0].user_name}</h1>
             <p className="text-gray-500">{profile![0].about_me}</p>
+            {viewUserId === userId && (
+              <a href={`/profile/${userId}/settings`} className="mt-4 text-blue-500">
+                Edit Profile
+              </a>
+            )}
           </div>
         </div>
         <div className="col-span-2">
