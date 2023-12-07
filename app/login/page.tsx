@@ -31,27 +31,35 @@ export default function Login({
   const signUp = async (formData: FormData) => {
     'use server'
 
-    return redirect('/login?message=Sign ups are currently blocked by the developer as to prevent any abuse of the application, contact the developer (if you know them) in order to sign up.');
+    // return redirect('/login?message=Sign ups are currently blocked by the developer as to prevent any abuse of the application, contact the developer (if you know them) in order to sign up.');
 
-    // const origin = headers().get('origin')
-    // const email = formData.get('email') as string
-    // const password = formData.get('password') as string
-    // const cookieStore = cookies()
-    // const supabase = createClient(cookieStore)
+    const origin = headers().get('origin')
+    const email = formData.get('email') as string
+    const password = formData.get('password') as string
+    const cookieStore = cookies()
+    const supabase = createClient(cookieStore)
 
-    // const { error } = await supabase.auth.signUp({
-    //   email,
-    //   password,
-    //   options: {
-    //     emailRedirectTo: `${origin}/auth/callback`,
-    //   },
-    // })
+    const username = formData.get('username') as string
 
-    // if (error) {
-    //   return redirect('/login?message=Could not authenticate user')
-    // }
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        emailRedirectTo: `${origin}/auth/callback`,
+      },
+    })
 
-    // return redirect('/login?message=Check email to continue sign in process')
+    const { data: profile, error: profileError } = await supabase
+      .from('profiles')
+      .insert({ auth_id: data?.user?.id, user_name: username })
+
+      if (error || profileError) {
+      console.log(error);
+      console.log(profileError);
+      return redirect('/login?message=Could not authenticate user')
+    }
+
+    return redirect('/login?message=Check email to continue sign in process')
   }
 
   return (
