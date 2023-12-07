@@ -22,14 +22,32 @@ export default async function Page() {
 
     const title = formData.get("title") as string;
     const content = formData.get("content") as string;
+    const image = formData.get("image") as File;
 
-    const { error } = await supabase.from("posts").insert([
+    const { data: post, error: postError } = await supabase.from("posts").insert([
       {
         title,
         content,
         author_id: userId,
       },
-    ]);
+    ])
+    .select();
+
+    const imagePath = `post/${post![0].id}`
+
+    const { data, error } = await supabase
+      .from("post-images")
+      .insert([
+        {
+          path: imagePath,
+          post_id: post![0].id,
+        }
+      ])
+
+    const { data: imageUpload, error: imageUploadError } = await supabase
+      .storage
+      .from("post-images")
+      .upload(imagePath, image)
 
     return redirect("/post");
   }
@@ -51,6 +69,13 @@ export default async function Page() {
               name="content"
               className="w-full px-4 py-2 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
             ></textarea>
+            <input 
+              type="file" 
+              name="image"
+              id="image"
+              accept="image/jpg"
+              className="mb-4 appearance-none bg-white border border-gray-300 py-2 px-4 rounded-md text-sm leading-tight focus:outline-none focus:border-blue-500"
+            />
             <button
               type="submit"
               className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
