@@ -27,8 +27,8 @@ export default async function Page({ params }: { params: { id: string }}) {
   return (
     <div className="flex-1 w-full flex flex-col gap-20 items-center">
       <Navbar />
-      <main className="w-full grid grid-cols-3 gap-8">
-        <div className="col-span-1">
+      <main className="w-full grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="col-span-1 md:col-span-1">
           {/* Profile Picture Section */}
           <div className="flex flex-col items-center">
             <img
@@ -45,13 +45,15 @@ export default async function Page({ params }: { params: { id: string }}) {
             )}
           </div>
         </div>
-        <div className="col-span-2">
+        <div className="col-span-1 md:col-span-2">
           {/* Post History */}
           <div>
             <h2 className="text-2xl font-bold mb-4">Post History</h2>
             {posts?.map((post, index) => (
               <div key={index} className="bg-white rounded-md p-4 mb-4">
-                <h3 className="text-xl font-bold mb-2">{post.title}</h3>
+                <h3 className="text-xl font-bold mb-2">
+                  <a href={`/post/${post.id}`}>{post.title}</a>
+                </h3>
                 <p className="text-gray-500">{post.content}</p>
               </div>
             ))}

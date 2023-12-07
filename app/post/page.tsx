@@ -56,7 +56,7 @@ export default async function Page() {
     <div className="flex-1 w-full flex flex-col gap-20 items-center">
       <Navbar />
       <main className="w-3/4 mx-auto">
-        <div className="flex-1 w-full flex flex-col gap-20 items-center m-4">
+        <div className="m-4">
           <form action={createPost} className="max-w-md mx-auto bg-white rounded-lg shadow-md p-8">
             <input
               type="text"
@@ -74,7 +74,7 @@ export default async function Page() {
               name="image"
               id="image"
               accept="image/jpg"
-              className="mb-4 appearance-none bg-white border border-gray-300 py-2 px-4 rounded-md text-sm leading-tight focus:outline-none focus:border-blue-500"
+              className="w-full px-4 py-2 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <button
               type="submit"

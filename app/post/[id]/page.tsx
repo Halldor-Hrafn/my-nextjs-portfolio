@@ -21,11 +21,17 @@ export default async function Page({ params }: { params: { id: string } }) {
     .select("*")
     .eq("post_id", params.id);
 
-  const imageUrl = supabase
-    .storage
-    .from("post-images")
-    .getPublicUrl(postImages![0].path)
-    .data.publicUrl;
+  let imageUrl = "";
+
+  console.log(postImages);
+
+  if (postImages!.length > 0) {
+    imageUrl = supabase
+      .storage
+      .from("post-images")
+      .getPublicUrl(postImages![0].path)
+      .data.publicUrl;
+  }
 
   const { data: comments, error: commentError } = await supabase
     .from("comments")
