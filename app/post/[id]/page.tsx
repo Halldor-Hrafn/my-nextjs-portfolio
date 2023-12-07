@@ -12,6 +12,21 @@ export default async function Page({ params }: { params: { id: string } }) {
     .select("*")
     .eq("id", params.id);
 
+    // would love to add support for embedding images within the text
+    // would also like to add support for multiple images
+    // aswell as markdown
+    // but I'll add that later
+  const { data: postImages, error: postImagesError } = await supabase
+    .from("post-images")
+    .select("*")
+    .eq("post_id", params.id);
+
+  const imageUrl = supabase
+    .storage
+    .from("post-images")
+    .getPublicUrl(postImages![0].path)
+    .data.publicUrl;
+
   const { data: comments, error: commentError } = await supabase
     .from("comments")
     .select("*")
@@ -45,6 +60,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         <div className="bg-white rounded-md p-4 mb-4">
           <h2 className="text-2xl font-bold mb-4">{post![0].title}</h2>
           <p className="text-gray-500">{post![0].content}</p>
+          <img src={imageUrl} alt="" />
         </div>
         <div className="m-4">
           <form action={createComment} className="max-w-md mx-auto bg-white rounded-lg shadow-md p-8">
