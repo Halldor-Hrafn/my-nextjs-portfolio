@@ -1,0 +1,160 @@
+.postContent > h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.postContent > h2 {
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin-bottom: 0.8rem;
+}
+
+.postContent > h3 {
+  font-size: 1.6rem;
+  font-weight: 500;
+  margin-bottom: 0.6rem;
+}
+
+.postContent > h4 {
+  font-size: 1.4rem;
+  font-weight: 500;
+  margin-bottom: 0.4rem;
+}
+
+.postContent > h5 {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 0.2rem;
+}
+
+.postContent > h6 {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.1rem;
+}
+
+.postContent > ul {
+  margin-left: 1.5rem;
+  list-style-type: disc;
+}
+
+.postContent > ol {
+  margin-left: 1.5rem;
+  list-style-type: decimal;
+}
+
+.postContent li {
+  margin-bottom: 0.5rem;
+}
+
+.postContent > p {
+  margin-bottom: 1rem;
+}
+
+.postContent > blockquote {
+  margin-left: 1rem;
+  padding-left: 1rem;
+  border-left: 2px solid #ddd;
+}
+
+.postContent > pre {
+  background-color: #f6f8fa;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+}
+
+.postContent > code {
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.postContent > a {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+.postContent > a:hover {
+  text-decoration: underline;
+}
+
+.postContent > hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 1rem 0;
+}
+
+.postContent > strong {
+  font-weight: 600;
+}
+
+.postContent > em {
+  font-style: italic;
+}
+
+.postContent > del {
+  text-decoration: line-through;
+}
+
+.postContent > img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+.postContent > table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+
+.postContent > table th,
+.postContent > table td {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+}
+
+.postContent > table th {
+  font-weight: 600;
+}
+
+.postContent > table td {
+  font-weight: normal;
+}
+
+.postContent > ul ul,
+.postContent > ol ol {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  margin-left: 1.5rem;
+}
+
+.postContent > ul ul li,
+.postContent > ol ol li {
+  list-style-type: circle;
+}
+
+.postContent > ul ul ul,
+.postContent > ol ol ol {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  margin-left: 1.5rem;
+}
+
+.postContent > ul ul ul li,
+.postContent > ol ol ol li {
+  list-style-type: square;
+}
+
+.postContent > code {
+  font-family: 'Courier New', Courier, monospace;
+  background-color: #f6f8fa;
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.2rem;
+}
+
+.postContent > pre code {
+  padding: 0;
+  background-color: transparent;
+  border-radius: 0;
+}

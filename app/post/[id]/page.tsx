@@ -1,7 +1,11 @@
 import Navbar from "@/components/Navbar";
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+
+import styles from "./page.module.css";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const cookieStore = cookies();
@@ -65,7 +69,11 @@ export default async function Page({ params }: { params: { id: string } }) {
       <main className="w-2/4 mx-auto">
         <div className="bg-white rounded-md p-4 mb-4">
           <h2 className="text-2xl font-bold mb-4">{post![0].title}</h2>
-          <p className="text-gray-500">{post![0].content}</p>
+          <div>
+            <Markdown className={`${styles.postContent}`} remarkPlugins={[[remarkGfm, { singleTilde: false }]]} >
+              {post![0].content}
+            </Markdown>
+          </div>
           <img src={imageUrl} alt="" />
         </div>
         <div className="m-4">
@@ -85,15 +93,16 @@ export default async function Page({ params }: { params: { id: string } }) {
             </form>
           )}
         </div>
-        <div className="bg-white rounded-md p-4 mb-4">
+        <div className="rounded-md p-4 mb-4 m-4">
           <h2 className="text-2xl font-bold mb-4">Comments</h2>
           {comments?.map((comment, index) => (
-            <div key={index} className="bg-white rounded-md p-4 mb-4">
-              <p className="text-gray-500">{comment.content}</p>
-              <a
-                href={`/profile/${comment.author_id}`}
-                className="text-blue-500 hover:underline"
-              >
+            <div key={index} className="bg-white rounded-md p-4 mb-4" style={{ marginBottom: '1rem' }}>
+              <div>
+                <Markdown className={`${styles.postContent}`} remarkPlugins={[[remarkGfm, { singleTilde: false }]]}>
+                  {comment.content}
+                </Markdown>
+              </div>
+              <a href={`/profile/${comment.author_id}`} className="text-blue-500 hover:underline">
                 Author
               </a>
             </div>
