@@ -7,6 +7,8 @@ export default async function Page() {
   const cookieStore = cookies()
   const supabase = createClient(cookieStore);
 
+  const userId = (await supabase.auth.getUser()).data?.user?.id;
+
   const { data: posts, error: postError } = await supabase
     .from("posts")
     .select("*")
@@ -57,32 +59,34 @@ export default async function Page() {
       <Navbar />
       <main className="w-3/4 mx-auto">
         <div className="m-4">
-          <form action={createPost} className="max-w-md mx-auto bg-white rounded-lg shadow-md p-8">
-            <input
-              type="text"
-              placeholder="Title"
-              name="title"
-              className="w-full px-4 py-2 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-            <textarea
-              placeholder="Content"
-              name="content"
-              className="w-full px-4 py-2 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            ></textarea>
-            <input 
-              type="file" 
-              name="image"
-              id="image"
-              accept="image/jpg"
-              className="w-full px-4 py-2 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-            <button
-              type="submit"
-              className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-            >
-              Submit
-            </button>
-          </form>
+          {userId && (
+            <form action={createPost} className="max-w-md mx-auto bg-white rounded-lg shadow-md p-8">
+              <input
+                type="text"
+                placeholder="Title"
+                name="title"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <textarea
+                placeholder="Content"
+                name="content"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              ></textarea>
+              <input 
+                type="file" 
+                name="image"
+                id="image"
+                accept="image/jpg"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <button
+                type="submit"
+                className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+              >
+                Submit
+              </button>
+            </form>
+          )}
         </div>
         {posts?.map((post, index) => (
           <div key={index} className="bg-white rounded-md p-4 mb-4">

@@ -7,6 +7,8 @@ export default async function Page({ params }: { params: { id: string } }) {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
 
+  const userId = (await supabase.auth.getUser()).data?.user?.id;
+
   const { data: post, error: postError } = await supabase
     .from("posts")
     .select("*")
@@ -22,8 +24,6 @@ export default async function Page({ params }: { params: { id: string } }) {
     .eq("post_id", params.id);
 
   let imageUrl = "";
-
-  console.log(postImages);
 
   if (postImages!.length > 0) {
     imageUrl = supabase
@@ -69,19 +69,21 @@ export default async function Page({ params }: { params: { id: string } }) {
           <img src={imageUrl} alt="" />
         </div>
         <div className="m-4">
-          <form action={createComment} className="max-w-md mx-auto bg-white rounded-lg shadow-md p-8">
-            <textarea
-              placeholder="Content"
-              name="content"
-              className="w-full px-4 py-2 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            ></textarea>
-            <button
-              type="submit"
-              className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-            >
-              Submit
-            </button>
-          </form>
+          {userId && (
+            <form action={createComment} className="max-w-md mx-auto bg-white rounded-lg shadow-md p-8">
+              <textarea
+                placeholder="Content"
+                name="content"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              ></textarea>
+              <button
+                type="submit"
+                className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+              >
+                Submit
+              </button>
+            </form>
+          )}
         </div>
         <div className="bg-white rounded-md p-4 mb-4">
           <h2 className="text-2xl font-bold mb-4">Comments</h2>
