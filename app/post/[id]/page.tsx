@@ -5,6 +5,8 @@ import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
+import { useState } from "react";
+
 import styles from "./page.module.css";
 
 export default async function Page({ params }: { params: { id: string } }) {
@@ -18,10 +20,10 @@ export default async function Page({ params }: { params: { id: string } }) {
     .select("*")
     .eq("id", params.id);
 
-    // would love to add support for embedding images within the text
-    // would also like to add support for multiple images
-    // aswell as markdown
-    // but I'll add that later
+  // would love to add support for embedding images within the text
+  // would also like to add support for multiple images
+  // aswell as markdown
+  // but I'll add that later
   const { data: postImages, error: postImagesError } = await supabase
     .from("post-images")
     .select("*")
@@ -30,11 +32,9 @@ export default async function Page({ params }: { params: { id: string } }) {
   let imageUrl = "";
 
   if (postImages!.length > 0) {
-    imageUrl = supabase
-      .storage
+    imageUrl = supabase.storage
       .from("post-images")
-      .getPublicUrl(postImages![0].path)
-      .data.publicUrl;
+      .getPublicUrl(postImages![0].path).data.publicUrl;
   }
 
   const { data: comments, error: commentError } = await supabase
@@ -61,24 +61,57 @@ export default async function Page({ params }: { params: { id: string } }) {
     ]);
 
     return redirect(`/post/${params.id}`);
+  };
+
+  const deletePost = async (formData: FormData) => {
+    "use server"
+
+    const cookieStore = cookies();
+    const supabase = createClient(cookieStore);
+
+    const postId = formData.get("postId") as string;
+
+    const { error } = await supabase.from("posts").delete().eq("id", postId);
+
+    console.log(error);
+
+    return redirect("/post");
   }
 
   return (
-    <div className="flex-1 w-full flex flex-col gap-20 items-center">
+    <div className="flex-1 w-full flex flex-col gap-8 items-center">
       <Navbar />
-      <main className="w-2/4 mx-auto">
+      <main className="w-full px-4 sm:w-3/4 md:w-2/3 lg:w-1/2 xl:w-1/3 mx-auto">
         <div className="bg-white rounded-md p-4 mb-4">
-          <h2 className="text-2xl font-bold mb-4">{post![0].title}</h2>
+          <div className="flex flex-col sm:flex-row items-center justify-between mb-4">
+            <h2 className="text-2xl font-bold mb-2 sm:mb-0 sm:mr-4">
+              {post![0].title}
+            </h2>
+            {userId === post![0].author_id && (
+              <form action={deletePost} className="inline">
+                <input type="hidden" name="postId" value={post![0].id} />
+                <button type="submit" className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                  Delete post
+                </button>
+              </form>
+            )}
+          </div>
           <div>
-            <Markdown className={`${styles.postContent}`} remarkPlugins={[[remarkGfm, { singleTilde: false }]]} >
+            <Markdown
+              className={`${styles.postContent}`}
+              remarkPlugins={[[remarkGfm, { singleTilde: false }]]}
+            >
               {post![0].content}
             </Markdown>
           </div>
-          <img src={imageUrl} alt="" />
+          <img src={imageUrl} alt="" className="w-full mt-4" />
         </div>
         <div className="m-4">
           {userId && (
-            <form action={createComment} className="max-w-md mx-auto bg-white rounded-lg shadow-md p-8">
+            <form
+              action={createComment}
+              className="max-w-md mx-auto bg-white rounded-lg shadow-md p-8"
+            >
               <textarea
                 placeholder="Content"
                 name="content"
@@ -96,13 +129,23 @@ export default async function Page({ params }: { params: { id: string } }) {
         <div className="rounded-md p-4 mb-4 m-4">
           <h2 className="text-2xl font-bold mb-4">Comments</h2>
           {comments?.map((comment, index) => (
-            <div key={index} className="bg-white rounded-md p-4 mb-4" style={{ marginBottom: '1rem' }}>
+            <div
+              key={index}
+              className="bg-white rounded-md p-4 mb-4"
+              style={{ marginBottom: "1rem" }}
+            >
               <div>
-                <Markdown className={`${styles.postContent}`} remarkPlugins={[[remarkGfm, { singleTilde: false }]]}>
+                <Markdown
+                  className={`${styles.postContent}`}
+                  remarkPlugins={[[remarkGfm, { singleTilde: false }]]}
+                >
                   {comment.content}
                 </Markdown>
               </div>
-              <a href={`/profile/${comment.author_id}`} className="text-blue-500 hover:underline">
+              <a
+                href={`/profile/${comment.author_id}`}
+                className="text-blue-500 hover:underline"
+              >
                 Author
               </a>
             </div>
