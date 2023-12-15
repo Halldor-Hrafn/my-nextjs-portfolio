@@ -106,7 +106,7 @@ export default async function Page() {
             <textarea
               id="description"
               name="description"
-              rows="4"
+              rows={5}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               required
             ></textarea>
