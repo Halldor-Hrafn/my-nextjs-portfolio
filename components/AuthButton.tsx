@@ -28,7 +28,7 @@ export default async function AuthButton() {
         </a>
       </span>
       <form action={signOut}>
-        <button className="py-2 px-4 rounded-md no-underline text-gray-800 bg-btn-background hover:bg-btn-background-hover">
+        <button className="py-2 px-4 rounded-md no-underline text-gray-800 bg-white hover:bg-btn-background-hover">
           Logout
         </button>
       </form>

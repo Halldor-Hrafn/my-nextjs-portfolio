@@ -50,7 +50,7 @@ export default async function Page({ params }: { params: { id: string }}) {
           <div>
             <h2 className="text-2xl font-bold mb-4">Post History</h2>
             {posts?.map((post, index) => (
-              <div key={index} className="bg-white rounded-md p-4 mb-4">
+              <div key={index} className="bg-background rounded-md p-4 mb-4">
                 <h3 className="text-xl font-bold mb-2">
                   <a href={`/post/${post.id}`}>{post.title}</a>
                 </h3>
@@ -62,7 +62,7 @@ export default async function Page({ params }: { params: { id: string }}) {
           <div className="mt-8">
             <h2 className="text-2xl font-bold mb-4">Comment History</h2>
             {comments?.map((comment, index) => (
-              <div key={index} className="bg-white rounded-md p-4 mb-4">
+              <div key={index} className="bg-background rounded-md p-4 mb-4">
                 <h3 className="text-xl font-bold mb-2">{comment.title}</h3>
                 <p className="text-gray-500">{comment.content}</p>
               </div>

@@ -56,7 +56,7 @@ export default async function Page({
     <div className="flex-1 w-full flex flex-col gap-20 items-center">
       <Navbar />
       <main className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div className="col-span-1 bg-white rounded-lg shadow-md p-8 m-2">
+        <div className="col-span-1 bg-background rounded-lg shadow-md p-8 m-2">
           <h2 className="text-2xl font-bold mb-4">Display Name</h2>
           <form
             action={handleDisplayNameChange}
@@ -66,7 +66,7 @@ export default async function Page({
               type="text"
               placeholder="New Display Name"
               name="displayName"
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 border bg-inherit border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <button
               type="submit"
@@ -76,20 +76,20 @@ export default async function Page({
             </button>
           </form>
         </div>
-        <div className="col-span-1 bg-white rounded-lg shadow-md p-8 m-2">
+        <div className="col-span-1 bg-background rounded-lg shadow-md p-8 m-2">
           <h2 className="text-2xl font-bold mb-4">Change Password</h2>
           <form action={handlePasswordReset} className="flex flex-col gap-4">
             <input
               type="password"
               placeholder="New Password"
               name="newPassword"
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 border bg-inherit border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <input
               type="password"
               placeholder="New Password (Verify)"
               name="newPasswordVerify"
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 border bg-inherit border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <button
               type="submit"

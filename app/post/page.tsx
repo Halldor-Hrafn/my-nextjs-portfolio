@@ -60,24 +60,24 @@ export default async function Page() {
       <main className="w-3/4 mx-auto">
         <div className="m-4">
           {userId && (
-            <form action={createPost} className="max-w-md mx-auto bg-white rounded-lg shadow-md p-8">
+            <form action={createPost} className="max-w-md mx-auto bg-background rounded-lg shadow-md p-8">
               <input
                 type="text"
                 placeholder="Title"
                 name="title"
-                className="w-full px-4 py-2 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 border bg-inherit text-gray-700 border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               <textarea
                 placeholder="Content"
                 name="content"
-                className="w-full px-4 py-2 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 border bg-inherit text-gray-700 border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
               ></textarea>
               <input 
                 type="file" 
                 name="image"
                 id="image"
                 accept="image/jpg"
-                className="w-full px-4 py-2 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 border bg-inherit text-gray-700 border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               <button
                 type="submit"
@@ -89,7 +89,7 @@ export default async function Page() {
           )}
         </div>
         {posts?.map((post, index) => (
-          <div key={index} className="bg-white rounded-md p-4 mb-4">
+          <div key={index} className="bg-background rounded-md p-4 mb-4">
             <h3 className="text-xl font-bold mb-2">
               <a href={`/post/${post.id}`}>{post.title}</a>
             </h3>
