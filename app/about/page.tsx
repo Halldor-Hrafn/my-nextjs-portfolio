@@ -4,7 +4,11 @@ import { redirect } from 'next/navigation';
 
 import { Resend } from 'resend';
 
-export default async function Page() {
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: { success: string }
+}) {
   const sendRequest = async (formData: FormData) => {
     "use server"
 
@@ -33,9 +37,11 @@ export default async function Page() {
       })
     } catch (error) {
       console.log(error)
+
+      return redirect("/about?success=false");
     }
 
-    return redirect("/about");
+    return redirect("/about?success=true");
   }
 
   return (
@@ -117,6 +123,17 @@ export default async function Page() {
           >
             Submit
           </button>
+          {searchParams?.success === "false" && (
+            <p className="mt-4 p-4 bg-red-500 text-white text-center">
+              Something went wrong, please try again later.
+            </p>
+          )}
+
+          {searchParams?.success === "true" && (
+            <p className="mt-4 p-4 bg-green-200 text-green-800 text-center">
+              Message sent successfully!
+            </p>
+          )}
         </form>
       </main>
     </div>
