@@ -69,18 +69,16 @@ export default function Login({
     const cookieStore = cookies()
     const supabase = createClient(cookieStore)
 
-    const { error } = await supabase.auth.signInWithOAuth({
+    console.log("signing in with github")
+
+    const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'github',
       options: {
         redirectTo: `${origin}/auth/callback`,
       },
     })
 
-    if (error) {
-      return redirect('/login?message=Could not authenticate user')
-    }
-
-    return redirect('/')
+    console.log(error);
   }
 
   return (
@@ -156,12 +154,11 @@ export default function Login({
           </p>
         )}
       </form>
-      <button
-        onClick={signInWithGithub}
-        className="border border-foreground/20 rounded-md px-4 py-2 text-foreground mb-2"
-      >
-        Sign In With Github
-      </button>
+      <form action={signInWithGithub}>
+        <button className="bg-foreground/20 rounded-md px-4 py-2 text-foreground mb-2">
+          Sign In With Github
+        </button>
+      </form>
     </div>
   )
 }
