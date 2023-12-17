@@ -62,6 +62,27 @@ export default function Login({
     return redirect('/login?message=Check email to continue sign in process')
   }
 
+  const signInWithGithub = async () => {
+    'use server'
+
+    const origin = headers().get('origin')
+    const cookieStore = cookies()
+    const supabase = createClient(cookieStore)
+
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'github',
+      options: {
+        redirectTo: `${origin}/auth/callback`,
+      },
+    })
+
+    if (error) {
+      return redirect('/login?message=Could not authenticate user')
+    }
+
+    return redirect('/')
+  }
+
   return (
     <div className="flex-1 flex flex-col w-full px-8 sm:max-w-md justify-center gap-2">
       <Link
@@ -135,6 +156,12 @@ export default function Login({
           </p>
         )}
       </form>
+      <button
+        onClick={signInWithGithub}
+        className="border border-foreground/20 rounded-md px-4 py-2 text-foreground mb-2"
+      >
+        Sign In With Github
+      </button>
     </div>
   )
 }
