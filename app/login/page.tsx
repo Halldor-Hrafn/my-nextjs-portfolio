@@ -62,28 +62,28 @@ export default function Login({
     return redirect('/login?message=Check email to continue sign in process')
   }
 
-  const signInWithGithub = async () => {
-    'use server'
+  // const signInWithGithub = async () => {
+  //   'use server'
 
-    const origin = headers().get('origin')
-    const cookieStore = cookies()
-    const supabase = createClient(cookieStore)
+  //   const origin = headers().get('origin')
+  //   const cookieStore = cookies()
+  //   const supabase = createClient(cookieStore)
 
-    console.log("signing in with github")
+  //   console.log("signing in with github")
 
-    console.log(origin)
+  //   console.log(origin)
 
-    const { data, error } = await supabase.auth.signInWithOAuth({
-      provider: 'github',
-      options: {
-        redirectTo: `${origin}/auth/callback`,
-      }
-    })
+  //   const { data, error } = await supabase.auth.signInWithOAuth({
+  //     provider: 'github',
+  //     options: {
+  //       redirectTo: `${origin}/auth/callback`,
+  //     }
+  //   })
 
-    console.log(error)
+  //   console.log(error)
 
-    return redirect(data?.url || '/')
-  }
+  //   return redirect(data?.url || '/')
+  // }
 
   return (
     <div className="flex-1 flex flex-col w-full px-8 sm:max-w-md justify-center gap-2">
@@ -158,11 +158,11 @@ export default function Login({
           </p>
         )}
       </form>
-      <form action={signInWithGithub}>
+      {/* <form action={signInWithGithub}>
         <button formAction={signInWithGithub} className="bg-foreground/20 rounded-md px-4 py-2 text-foreground mb-2">
           Sign In With Github
         </button>
-      </form>
+      </form> */}
     </div>
   )
 }
