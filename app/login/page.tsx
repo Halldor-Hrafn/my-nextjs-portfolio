@@ -65,6 +65,7 @@ export default function Login({
   // const signInWithGithub = async () => {
   //   'use server'
 
+  //   const origin = headers().get('origin')
   //   const cookieStore = cookies()
   //   const supabase = createClient(cookieStore)
 
@@ -72,6 +73,9 @@ export default function Login({
 
   //   const { data, error } = await supabase.auth.signInWithOAuth({
   //     provider: 'github',
+  //     options: {
+  //       redirectTo: `${origin}/auth/callback`,
+  //     }
   //   })
 
   //   return redirect(data?.url || '/')
