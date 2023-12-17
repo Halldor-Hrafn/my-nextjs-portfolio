@@ -5,8 +5,6 @@ import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-import { useState } from "react";
-
 import styles from "./page.module.css";
 
 export default async function Page({ params }: { params: { id: string } }) {

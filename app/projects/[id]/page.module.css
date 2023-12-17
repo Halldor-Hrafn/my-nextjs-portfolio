@@ -1,0 +1,160 @@
+.projectContent > h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.projectContent > h2 {
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin-bottom: 0.8rem;
+}
+
+.projectContent > h3 {
+  font-size: 1.6rem;
+  font-weight: 500;
+  margin-bottom: 0.6rem;
+}
+
+.projectContent > h4 {
+  font-size: 1.4rem;
+  font-weight: 500;
+  margin-bottom: 0.4rem;
+}
+
+.projectContent > h5 {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 0.2rem;
+}
+
+.projectContent > h6 {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.1rem;
+}
+
+.projectContent > ul {
+  margin-left: 1.5rem;
+  list-style-type: disc;
+}
+
+.projectContent > ol {
+  margin-left: 1.5rem;
+  list-style-type: decimal;
+}
+
+.projectContent li {
+  margin-bottom: 0.5rem;
+}
+
+.projectContent > p {
+  margin-bottom: 1rem;
+}
+
+.projectContent > blockquote {
+  margin-left: 1rem;
+  padding-left: 1rem;
+  border-left: 2px solid #ddd;
+}
+
+.projectContent > pre {
+  background-color: #f6f8fa;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+}
+
+.projectContent > code {
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.projectContent > a {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+.projectContent > a:hover {
+  text-decoration: underline;
+}
+
+.projectContent > hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 1rem 0;
+}
+
+.projectContent > strong {
+  font-weight: 600;
+}
+
+.projectContent > em {
+  font-style: italic;
+}
+
+.projectContent > del {
+  text-decoration: line-through;
+}
+
+.projectContent > img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+.projectContent > table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+
+.projectContent > table th,
+.projectContent > table td {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+}
+
+.projectContent > table th {
+  font-weight: 600;
+}
+
+.projectContent > table td {
+  font-weight: normal;
+}
+
+.projectContent > ul ul,
+.projectContent > ol ol {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  margin-left: 1.5rem;
+}
+
+.projectContent > ul ul li,
+.projectContent > ol ol li {
+  list-style-type: circle;
+}
+
+.projectContent > ul ul ul,
+.projectContent > ol ol ol {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  margin-left: 1.5rem;
+}
+
+.projectContent > ul ul ul li,
+.projectContent > ol ol ol li {
+  list-style-type: square;
+}
+
+.projectContent > code {
+  font-family: 'Courier New', Courier, monospace;
+  background-color: #f6f8fa;
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.2rem;
+}
+
+.projectContent > pre code {
+  padding: 0;
+  background-color: transparent;
+  border-radius: 0;
+}
