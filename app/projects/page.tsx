@@ -35,13 +35,6 @@ export default async function Page() {
                     {project.name}
                   </a>
                 </h1>
-                <p className="text-gray-700 mb-4">{project.description}</p>
-                <a
-                  href={project.url}
-                  className="text-blue-500 hover:text-blue-700"
-                >
-                  {project.url}
-                </a>
               </div>
             ))}
           </div>

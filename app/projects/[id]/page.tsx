@@ -24,12 +24,23 @@ export default async function Page({ params }: { params: { id: string } }) {
       <main className="flex-1 flex flex-col items-center justify-center">
         <div className="max-w-3xl mx-auto m-10 bg-background rounded-lg shadow-md p-8">
           <h1 className="text-3xl font-bold mb-4">{project?.[0].name}</h1>
-          <p className="text-gray-700 mb-4">{project?.[0].description}</p>
-          <a href={project?.[0].url} className="text-blue-500 hover:text-blue-700">
-            {project?.[0].url}
-          </a>
+          <p>
+            Project Link:{" "}
+            <a
+              href={project?.[0].project_link}
+              className="text-blue-500 hover:underline"
+            >
+              Here
+            </a>
+          </p>
+          <Markdown
+            className={styles.projectContent}
+            remarkPlugins={[remarkGfm]}
+          >
+            {project?.[0].description}
+          </Markdown>
         </div>
       </main>
     </div>
-  )
+  );
 }
