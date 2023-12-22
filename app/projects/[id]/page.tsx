@@ -18,6 +18,33 @@ export default async function Page({ params }: { params: { id: string } }) {
     .select("*")
     .eq("id", params.id);
 
+  const { data: comments, error: commentsError } = await supabase
+    .from("project-comments")
+    .select("*")
+    .eq("project_id", params.id);
+
+  console.log(comments);
+
+  const createComment = async (formData: FormData) => {
+    "use server";
+
+    const supabase = createClient(cookies());
+
+    const content = formData.get("content") as string;
+
+    const { data, error } = await supabase
+      .from("project-comments")
+      .insert({ content, author_id: userId, project_id: params.id });
+
+    if (error) {
+      console.log(error);
+
+      return redirect("/projects/" + params.id);
+    }
+
+    return redirect("/projects/" + params.id);
+  }
+
   return (
     <div className="flex-1 w-full flex flex-col gap-20 items-center">
       <Navbar />
@@ -39,6 +66,53 @@ export default async function Page({ params }: { params: { id: string } }) {
           >
             {project?.[0].description}
           </Markdown>
+        </div>
+        <div className="m-4">
+          {userId && (
+            <form
+              action={createComment}
+              className="max-w-md mx-auto bg-background rounded-lg shadow-md p-8"
+            >
+              <textarea
+                placeholder="Content"
+                name="content"
+                className="w-full px-4 py-2 border border-gray-300 bg-inherit text-gray-700 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              ></textarea>
+              <button
+                type="submit"
+                className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+              >
+                Submit
+              </button>
+            </form>
+          )}
+        </div>
+        <div>
+          <h1 className="text-2xl font-bold mb-4">Comments</h1>
+          <div>
+            {comments?.map((comment, index) => (
+              <div
+              key={index}
+              className="bg-background rounded-md p-4 mb-4"
+              style={{ marginBottom: "1rem" }}
+            >
+              <div>
+                <Markdown
+                  className={`${styles.postContent}`}
+                  remarkPlugins={[[remarkGfm, { singleTilde: false }]]}
+                >
+                  {comment.content}
+                </Markdown>
+              </div>
+              <a
+                href={`/profile/${comment.author_id}`}
+                className="text-blue-500 hover:underline"
+              >
+                Author
+              </a>
+            </div>
+            ))}
+          </div>
         </div>
       </main>
     </div>
