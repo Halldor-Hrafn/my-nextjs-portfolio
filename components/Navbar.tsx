@@ -23,12 +23,6 @@ const Navbar: React.FC = () => {
               >
                 About me
               </a>
-              <a
-                href="/post"
-                className="text-gray-300 hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition duration-500"
-              >
-                Posts
-              </a>
               <a 
                 href="/projects"
                 className="text-gray-300 hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition duration-500"
