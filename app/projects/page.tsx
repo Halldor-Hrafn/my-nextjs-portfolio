@@ -18,26 +18,23 @@ export default async function Page() {
     <div className="flex-1 w-full flex flex-col gap-20 items-center">
       <Navbar />
       <main className="flex-1 flex flex-col items-center justify-center">
-        <div className="max-w-3xl mx-auto m-10 bg-background rounded-lg shadow-md p-8">
-          <h1 className="text-3xl font-bold mb-4">Projects</h1>
-          <p className="text-gray-700 mb-4">
-            Here you can find all of my projects, from my website to my
-            discord bots.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <h1 className="text-2xl font-bold mb-4">Projects</h1>
+          <ul>
             {projects?.map((project) => (
-              <div
-                key={project.id}
-                className="bg-background rounded-lg shadow-md p-8"
-              >
-                <h1 className="text-2xl font-bold mb-4">
-                  <a href={`/projects/${project.id}`}>
+              <li key={project.id} className="mb-4">
+                <div className="flex items-center">
+                  <a
+                    href={`/projects/${project.id}`}
+                    className="text-blue-500 hover:underline mr-2"
+                  >
                     {project.name}
                   </a>
-                </h1>
-              </div>
+                  <p className="text-gray-600">{project.short_description}</p>
+                </div>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </main>
     </div>
